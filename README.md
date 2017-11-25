@@ -1,1 +1,1 @@
-# SVGLoadersPack-Android
+# SVGLoadersPack
