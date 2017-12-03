@@ -54,8 +54,33 @@ class MainActivity : AppCompatActivity() {
                 1 -> {
                     svgView.shapesStringArray = resources.getStringArray(R.array.twitter_logo_path)
                     svgView.fillColorsArray = resources.getIntArray(R.array.twitter_logo_colors)
+                    svgView.validateTraceColors()
                     svgView.setViewportSize(2000.0f, 1625.36f)
                     currentLogoPos = 2
+                }
+
+                2 -> {
+                    svgView.shapesStringArray = resources.getStringArray(R.array.github_logo_path)
+                    svgView.fillColorsArray = resources.getIntArray(R.array.github_logo_colors)
+                    svgView.validateTraceColors()
+                    svgView.setViewportSize(512.0f, 512.0f)
+                    currentLogoPos = 3
+                }
+
+                3 -> {
+                    svgView.shapesStringArray = resources.getStringArray(R.array.shotang_logo_path)
+                    svgView.fillColorsArray = resources.getIntArray(R.array.shotang_logo_colors)
+                    svgView.validateTraceColors()
+                    svgView.setViewportSize(500.0f, 500.0f)
+                    currentLogoPos = 4
+                }
+
+                4 -> {
+                    svgView.shapesStringArray = resources.getStringArray(R.array.google_logo_path)
+                    svgView.fillColorsArray = resources.getIntArray(R.array.google_logo_colors)
+                    svgView.validateTraceColors()
+                    svgView.setViewportSize(400.0f, 400.0f)
+                    currentLogoPos = 1
                 }
             }
         }

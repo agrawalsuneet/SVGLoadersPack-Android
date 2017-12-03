@@ -6,7 +6,7 @@ import android.graphics.Path
 /**
  * Created by suneet on 11/28/17.
  */
-internal class ShapeData {
+class ShapeData {
     lateinit var path: Path
     lateinit var paint: Paint
     var length: Float = 0f

@@ -148,6 +148,8 @@ class SVGLoader : View, LoaderContract {
 
         super.onMeasure(View.MeasureSpec.makeMeasureSpec(width, View.MeasureSpec.EXACTLY),
                 View.MeasureSpec.makeMeasureSpec(height, View.MeasureSpec.EXACTLY))
+
+        rebuildShapeData()
     }
 
     @SuppressLint("DrawAllocation")
@@ -270,6 +272,18 @@ class SVGLoader : View, LoaderContract {
 
     fun isAnimRunning(): Boolean {
         return SVGLoaderState.StateLoading == state
+    }
+
+    fun validateTraceColors() {
+        traceColorsArray = IntArray(shapesStringArray.size)
+        traceResidueColorsArray = IntArray(shapesStringArray.size)
+
+        for (i in 0 until shapesStringArray.size) {
+            val fillColor = fillColorsArray[i]
+            traceColorsArray[i] = Helper.adjustAlpha(fillColor, 1.0f)
+            traceResidueColorsArray[i] = Helper.adjustAlpha(fillColor, 0.3f)
+        }
+
     }
 
     private enum class SVGLoaderState {
