@@ -58,6 +58,15 @@ class SVGLoader : View, LoaderContract {
         initAttributes(attrs)
     }
 
+    constructor(context: Context, shapesStringArray: Array<String>,
+                fillColorsArray: IntArray, viewportWidth: Float,
+                viewportHeight: Float) : super(context) {
+        this.shapesStringArray = shapesStringArray
+        this.fillColorsArray = fillColorsArray
+        this.viewportWidth = viewportWidth
+        this.viewportHeight = viewportHeight
+    }
+
     override fun initAttributes(attrs: AttributeSet) {
 
         val typedArray = context.obtainStyledAttributes(attrs, R.styleable.SVGLoader)

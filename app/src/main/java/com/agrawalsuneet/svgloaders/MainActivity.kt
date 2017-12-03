@@ -1,12 +1,17 @@
 package com.agrawalsuneet.svgloaders
 
 import android.os.Bundle
+import android.support.constraint.ConstraintLayout
 import android.support.v7.app.AppCompatActivity
+import android.view.ViewGroup
+import android.view.animation.DecelerateInterpolator
+import android.view.animation.LinearInterpolator
 import android.widget.Button
-import android.widget.Toast
 import com.agrawalsuneet.svgloaderspack.loaders.SVGLoader
 
 class MainActivity : AppCompatActivity() {
+
+    lateinit var container: ConstraintLayout
 
     lateinit var svgView: SVGLoader
 
@@ -19,15 +24,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        svgView = findViewById(R.id.animated_svg_view)
-        svgView.listener = (object : SVGLoader.AnimationListener {
-            override fun onAnimationEnd() {
-                Toast.makeText(baseContext, "Animation end", Toast.LENGTH_SHORT).show()
-                playPauseBtn.isEnabled = true
-                nextSVGBtn.isEnabled = true
-            }
-
-        })
+        container = findViewById(R.id.container)
+        addSVGViewProgrammatically()
 
         playPauseBtn = findViewById(R.id.playpauseBtn)
         nextSVGBtn = findViewById(R.id.nextSvgBtn)
@@ -44,6 +42,20 @@ class MainActivity : AppCompatActivity() {
                 nextSVGBtn.isEnabled = false
             }
         }
+
+        /*svgView = findViewById(R.id.animated_svg_view)
+        svgView.listener = (object : SVGLoader.AnimationListener {
+            override fun onAnimationEnd() {
+                Toast.makeText(baseContext, "Animation end", Toast.LENGTH_SHORT).show()
+                playPauseBtn.isEnabled = true
+                nextSVGBtn.isEnabled = true
+            }
+
+        })
+
+
+
+
 
         svgView.startAnimation()
         playPauseBtn.text = "Stop"
@@ -83,6 +95,24 @@ class MainActivity : AppCompatActivity() {
                     currentLogoPos = 1
                 }
             }
-        }
+        }*/
+    }
+
+    private fun addSVGViewProgrammatically() {
+        svgView = SVGLoader(baseContext, resources.getStringArray(R.array.shotang_logo_path),
+                resources.getIntArray(R.array.shotang_logo_colors), 512f, 512f)
+                .apply {
+                    layoutParams = ViewGroup.LayoutParams(800, 800)
+                    markerLength = 50
+                    fillTime = 1000
+                    timePerShape = 2000
+                    interpolator = DecelerateInterpolator()
+                    validateTraceColors()
+                    /*traceResidueColorsArray = resources.getIntArray(R.array.google_logo_colors)
+                    traceColorsArray = resources.getIntArray(R.array.google_logo_colors)*/
+                }
+
+        container.addView(svgView)
+        svgView.startAnimation()
     }
 }
