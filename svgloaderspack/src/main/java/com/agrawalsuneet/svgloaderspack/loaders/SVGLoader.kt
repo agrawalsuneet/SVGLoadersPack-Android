@@ -45,26 +45,19 @@ class SVGLoader : View, LoaderContract {
     private var aspectRatioWidth = 1f
     private var aspectRatioHeight = 1f
 
-    private var mFillPaint: Paint? = null
-
-
     private var mWidth: Int = 0
     private var mHeight: Int = 0
     private var animStartTime: Long = 0
 
 
-    constructor(context: Context) : super(context) {
-        initPaints()
-    }
+    constructor(context: Context) : super(context)
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
         initAttributes(attrs)
-        initPaints()
     }
 
     constructor(context: Context, attrs: AttributeSet, defStyle: Int) : super(context, attrs, defStyle) {
         initAttributes(attrs)
-        initPaints()
     }
 
     override fun initAttributes(attrs: AttributeSet) {
@@ -120,16 +113,6 @@ class SVGLoader : View, LoaderContract {
         return colors
     }
 
-    private fun initPaints() {
-
-
-        mFillPaint = Paint()
-        mFillPaint!!.isAntiAlias = true
-        mFillPaint!!.style = Paint.Style.FILL
-
-
-    }
-
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
         mWidth = w
@@ -159,10 +142,6 @@ class SVGLoader : View, LoaderContract {
 
         super.onMeasure(View.MeasureSpec.makeMeasureSpec(width, View.MeasureSpec.EXACTLY),
                 View.MeasureSpec.makeMeasureSpec(height, View.MeasureSpec.EXACTLY))
-    }
-
-    private fun constrain(min: Float, max: Float, v: Float): Float {
-        return Math.max(min, Math.min(max, v))
     }
 
     @SuppressLint("DrawAllocation")
@@ -199,16 +178,20 @@ class SVGLoader : View, LoaderContract {
             //start filling the shapes
             val timeAfterShapesDrawn = timeDiff - timePerShape
 
+            val fillPaint = Paint()
+            fillPaint.isAntiAlias = true
+            fillPaint.style = Paint.Style.FILL
+
             //fill the colors
             val currentPhase = constrain(0f, 1f, timeAfterShapesDrawn / fillTime)
             for (i in shapeDataArray.indices) {
                 val fillColor = fillColorsArray[i]
-                val a = (currentPhase * (Color.alpha(fillColor).toFloat() / 255.toFloat()) * 255f).toInt()
-                val r = Color.red(fillColor)
-                val g = Color.green(fillColor)
-                val b = Color.blue(fillColor)
-                mFillPaint!!.setARGB(a, r, g, b)
-                canvas.drawPath(shapeDataArray[i]!!.path, mFillPaint!!)
+                val alpha = (currentPhase * Color.alpha(fillColor)).toInt()
+                val red = Color.red(fillColor)
+                val green = Color.green(fillColor)
+                val blue = Color.blue(fillColor)
+                fillPaint.setARGB(alpha, red, green, blue)
+                canvas.drawPath(shapeDataArray[i]!!.path, fillPaint)
             }
 
             if (timeDiff > timePerShape + fillTime) {
@@ -223,6 +206,10 @@ class SVGLoader : View, LoaderContract {
         ViewCompat.postInvalidateOnAnimation(this)
     }
 
+    private fun constrain(min: Float, max: Float, v: Float): Float {
+        return Math.max(min, Math.min(max, v))
+    }
+
     fun rebuildShapeData() {
 
         val X = mWidth / viewportWidth
@@ -232,7 +219,7 @@ class SVGLoader : View, LoaderContract {
         val outerRect = RectF(X, X, Y, Y)
         scaleMatrix.setScale(X, Y, outerRect.centerX(), outerRect.centerY())
 
-        shapeDataArray = arrayOfNulls<ShapeData>(shapesStringArray.size)
+        shapeDataArray = arrayOfNulls(shapesStringArray.size)
         for (i in shapesStringArray.indices) {
             shapeDataArray[i] = ShapeData()
             try {
