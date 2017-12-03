@@ -1,18 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <com.agrawalsuneet.svgloaderspack.loaders.SVGLoader
+        android:id="@+id/animated_svg_view"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        app:svgloader_fillColorsArray="@array/shotang_logo_colors"
+        app:svgloader_fillTime="5000"
+        app:svgloader_interpolator="@android:anim/decelerate_interpolator"
+        app:svgloader_markerLength="10dp"
+        app:svgloader_residueColorsArray="@array/shotang_logo_residue_colors"
+        app:svgloader_shapesStringArray="@array/shotang_logo_path"
+        app:svgloader_timePerShape="3000"
+        app:svgloader_traceColorsArray="@array/shotang_logo_colors"
+        app:svgloader_viewportHeight="500"
+        app:svgloader_viewportWidth="500" />
 
-</android.support.constraint.ConstraintLayout>
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="Button" />
+</LinearLayout>

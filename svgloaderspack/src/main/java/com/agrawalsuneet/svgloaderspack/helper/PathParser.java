@@ -11,23 +11,23 @@ import java.util.ArrayList;
 
 // This class is a duplicate from the PathParser.java of frameworks/base, with slight
 // update on incompatible API like copyOfRange().
-class PathParser {
+public class PathParser {
     private static final String LOGTAG = "PathParser";
 
     // Copy from Arrays.copyOfRange() which is only available from API level 9.
 
     /**
-     * Copies elements from {@code original} into a new array, from indexes start (inclusive) to
+     * Copies elements from {@code original} into a new array, from indexes startAnimation (inclusive) to
      * end (exclusive). The original order of elements is preserved.
      * If {@code end} is greater than {@code original.length}, the result is padded
      * with the value {@code 0.0f}.
      *
      * @param original the original array
-     * @param start    the start index, inclusive
+     * @param start    the startAnimation index, inclusive
      * @param end      the end index, exclusive
      * @return the new array
-     * @throws ArrayIndexOutOfBoundsException if {@code start < 0 || start > original.length}
-     * @throws IllegalArgumentException       if {@code start > end}
+     * @throws ArrayIndexOutOfBoundsException if {@code startAnimation < 0 || startAnimation > original.length}
+     * @throws IllegalArgumentException       if {@code startAnimation > end}
      * @throws NullPointerException           if {@code original == null}
      */
     static float[] copyOfRange(float[] original, int start, int end) {
@@ -227,12 +227,12 @@ class PathParser {
      * Calculate the position of the next comma or space or negative sign
      *
      * @param s      the string to search
-     * @param start  the position to start searching
+     * @param start  the position to startAnimation searching
      * @param result the result of the extraction, including the position of the
      *               the starting position of next number, whether it is ending with a '-'.
      */
     private static void extract(String s, int start, PathParser.ExtractFloatResult result) {
-        // Now looking for ' ', ',', '.' or '-' from the start.
+        // Now looking for ' ', ',', '.' or '-' from the startAnimation.
         int currentIndex = start;
         boolean foundSeparator = false;
         result.mEndWithNegOrDot = false;
@@ -317,7 +317,7 @@ class PathParser {
          * <code>nodeFrom</code> and <code>nodeTo</code> according to the
          * <code>fraction</code>.
          *
-         * @param nodeFrom The start value as a PathDataNode.
+         * @param nodeFrom The startAnimation value as a PathDataNode.
          * @param nodeTo   The end value as a PathDataNode
          * @param fraction The fraction to interpolate.
          */
@@ -667,7 +667,7 @@ class PathParser {
          * @param e1x   E(eta1) x coordinate of the starting point of the arc
          * @param e1y   E(eta2) y coordinate of the starting point of the arc
          * @param theta The angle that the ellipse bounding rectangle makes with horizontal plane
-         * @param start The start angle of the arc on the ellipse
+         * @param start The startAnimation angle of the arc on the ellipse
          * @param sweep The angle (positive or negative) of the sweep of the arc on the ellipse
          */
         private static void arcToBezier(Path p,
