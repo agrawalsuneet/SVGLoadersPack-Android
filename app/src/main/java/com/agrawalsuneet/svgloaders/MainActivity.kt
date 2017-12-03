@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.view.animation.DecelerateInterpolator
 import android.view.animation.LinearInterpolator
 import android.widget.Button
+import android.widget.Toast
 import com.agrawalsuneet.svgloaderspack.loaders.SVGLoader
 
 class MainActivity : AppCompatActivity() {
@@ -25,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         container = findViewById(R.id.container)
-        addSVGViewProgrammatically()
+        //addSVGViewProgrammatically()
 
         playPauseBtn = findViewById(R.id.playpauseBtn)
         nextSVGBtn = findViewById(R.id.nextSvgBtn)
@@ -43,7 +44,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        /*svgView = findViewById(R.id.animated_svg_view)
+        svgView = findViewById(R.id.svg_loader)
         svgView.listener = (object : SVGLoader.AnimationListener {
             override fun onAnimationEnd() {
                 Toast.makeText(baseContext, "Animation end", Toast.LENGTH_SHORT).show()
@@ -52,10 +53,6 @@ class MainActivity : AppCompatActivity() {
             }
 
         })
-
-
-
-
 
         svgView.startAnimation()
         playPauseBtn.text = "Stop"
@@ -95,7 +92,7 @@ class MainActivity : AppCompatActivity() {
                     currentLogoPos = 1
                 }
             }
-        }*/
+        }
     }
 
     private fun addSVGViewProgrammatically() {
@@ -112,6 +109,14 @@ class MainActivity : AppCompatActivity() {
                     traceColorsArray = resources.getIntArray(R.array.google_logo_colors)*/
                 }
 
+        svgView.listener = (object : SVGLoader.AnimationListener {
+            override fun onAnimationEnd() {
+                Toast.makeText(baseContext, "Animation end", Toast.LENGTH_SHORT).show()
+                playPauseBtn.isEnabled = true
+                nextSVGBtn.isEnabled = true
+            }
+
+        })
         container.addView(svgView)
         svgView.startAnimation()
     }
