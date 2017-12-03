@@ -11,8 +11,8 @@ import android.view.View
 import android.view.animation.AnimationUtils
 import android.view.animation.DecelerateInterpolator
 import android.view.animation.Interpolator
-import com.agrawalsuneet.svgloader.basicviews.LoaderContract
 import com.agrawalsuneet.svgloaderspack.R
+import com.agrawalsuneet.svgloaderspack.basicviews.LoaderContract
 import com.agrawalsuneet.svgloaderspack.data.ShapeData
 import com.agrawalsuneet.svgloaderspack.helper.PathParser
 import com.agrawalsuneet.svgloaderspack.utils.Helper

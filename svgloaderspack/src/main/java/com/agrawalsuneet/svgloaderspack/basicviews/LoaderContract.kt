@@ -1,4 +1,4 @@
-package com.agrawalsuneet.svgloader.basicviews
+package com.agrawalsuneet.svgloaderspack.basicviews
 
 import android.util.AttributeSet
 
