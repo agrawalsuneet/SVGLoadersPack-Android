@@ -16,10 +16,8 @@
         app:svgloader_fillTime="2000"
         app:svgloader_interpolator="@android:anim/decelerate_interpolator"
         app:svgloader_markerLength="10dp"
-        app:svgloader_residueColorsArray="@array/shotang_logo_residue_colors"
         app:svgloader_shapesStringArray="@array/shotang_logo_path"
         app:svgloader_timePerShape="3000"
-        app:svgloader_traceColorsArray="@array/shotang_logo_colors"
         app:svgloader_viewportHeight="500"
         app:svgloader_viewportWidth="500" />
 

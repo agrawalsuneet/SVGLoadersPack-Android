@@ -15,6 +15,7 @@ import com.agrawalsuneet.svgloader.basicviews.LoaderContract
 import com.agrawalsuneet.svgloaderspack.R
 import com.agrawalsuneet.svgloaderspack.data.ShapeData
 import com.agrawalsuneet.svgloaderspack.helper.PathParser
+import com.agrawalsuneet.svgloaderspack.utils.Helper
 
 /**
  * Created by suneet on 12/2/17.
@@ -88,16 +89,23 @@ class SVGLoader : View, LoaderContract {
 
         if (shapesStringArrayId == 0) {
             throw RuntimeException("You need to set the shapes string array first.")
+        } else if (fillColorsArrayId == 0) {
+            throw RuntimeException("You need to set the shapes color array first.")
         }
 
         shapesStringArray = resources.getStringArray(shapesStringArrayId)
+        fillColorsArray = resources.getIntArray(fillColorsArrayId)
 
-        fillColorsArray = validateColorsArray(fillColorsArrayId, Color.WHITE)
-        traceColorsArray = validateColorsArray(traceColorArrayId, Color.BLACK)
-        traceResidueColorsArray = validateColorsArray(traceResidueColorsArrayId, Color.GRAY)
+        if (shapesStringArray.size > fillColorsArray.size) {
+            throw RuntimeException("Not enough colors to match all shapes. " +
+                    "Please check the size of shapes arting array and colors array")
+        }
+
+        traceColorsArray = validateColorsArray(traceColorArrayId, Color.BLACK, 1.0f)
+        traceResidueColorsArray = validateColorsArray(traceResidueColorsArrayId, Color.GRAY, 0.3f)
     }
 
-    private fun validateColorsArray(arrayId: Int, color: Int): IntArray {
+    private fun validateColorsArray(arrayId: Int, color: Int, alpha: Float): IntArray {
         val colors = IntArray(shapesStringArray.size)
 
         if (arrayId != 0) {
@@ -107,7 +115,8 @@ class SVGLoader : View, LoaderContract {
             }
         } else {
             for (i in 0 until shapesStringArray.size) {
-                colors[i] = color
+                val fillColor = fillColorsArray[i]
+                colors[i] = Helper.adjustAlpha(fillColor, alpha)
             }
         }
         return colors
