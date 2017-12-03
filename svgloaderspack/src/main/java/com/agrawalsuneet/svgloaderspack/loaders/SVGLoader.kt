@@ -43,9 +43,6 @@ class SVGLoader : View, LoaderContract {
 
     var interpolator: Interpolator = DecelerateInterpolator()
 
-    private var aspectRatioWidth = 1f
-    private var aspectRatioHeight = 1f
-
     private var mWidth: Int = 0
     private var mHeight: Int = 0
     private var animStartTime: Long = 0
@@ -77,8 +74,8 @@ class SVGLoader : View, LoaderContract {
                 typedArray.getResourceId(R.styleable.SVGLoader_svgloader_interpolator,
                         android.R.anim.decelerate_interpolator))
 
-        aspectRatioWidth = viewportWidth
-        aspectRatioHeight = viewportHeight
+        viewportWidth = viewportWidth
+        viewportHeight = viewportHeight
 
         val shapesStringArrayId = typedArray.getResourceId(R.styleable.SVGLoader_svgloader_shapesStringArray, 0)
         val traceColorArrayId = typedArray.getResourceId(R.styleable.SVGLoader_svgloader_traceColorsArray, 0)
@@ -140,13 +137,13 @@ class SVGLoader : View, LoaderContract {
             width = 0
             height = 0
         } else if (height <= 0 && heightMode == View.MeasureSpec.UNSPECIFIED) {
-            height = (width * aspectRatioHeight / aspectRatioWidth).toInt()
+            height = (width * viewportHeight / viewportWidth).toInt()
         } else if (width <= 0 && widthMode == View.MeasureSpec.UNSPECIFIED) {
-            width = (height * aspectRatioWidth / aspectRatioHeight).toInt()
-        } else if (width * aspectRatioHeight > aspectRatioWidth * height) {
-            width = (height * aspectRatioWidth / aspectRatioHeight).toInt()
+            width = (height * viewportWidth / viewportHeight).toInt()
+        } else if (width * viewportHeight > viewportWidth * height) {
+            width = (height * viewportWidth / viewportHeight).toInt()
         } else {
-            height = (width * aspectRatioHeight / aspectRatioWidth).toInt()
+            height = (width * viewportHeight / viewportWidth).toInt()
         }
 
         super.onMeasure(View.MeasureSpec.makeMeasureSpec(width, View.MeasureSpec.EXACTLY),
@@ -257,8 +254,6 @@ class SVGLoader : View, LoaderContract {
     fun setViewportSize(viewportWidth: Float, viewportHeight: Float) {
         this.viewportWidth = viewportWidth
         this.viewportHeight = viewportHeight
-        aspectRatioWidth = viewportWidth
-        aspectRatioHeight = viewportHeight
         requestLayout()
     }
 
@@ -273,7 +268,11 @@ class SVGLoader : View, LoaderContract {
         state = SVGLoaderState.StateFill
     }
 
-    enum class SVGLoaderState {
+    fun isAnimRunning(): Boolean {
+        return SVGLoaderState.StateLoading == state
+    }
+
+    private enum class SVGLoaderState {
         StateLoading, StateFill
     }
 
