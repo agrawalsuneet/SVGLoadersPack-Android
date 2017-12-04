@@ -47,6 +47,18 @@ class SVGLoader : View, LoaderContract {
     private var mHeight: Int = 0
     private var animStartTime: Long = 0
 
+    private enum class SVGLoaderState {
+        StateLoading, StateFill, StateEnd
+    }
+
+    private var state: SVGLoaderState = SVGLoaderState.StateEnd
+
+    var listener: SVGLoader.AnimationListener? = null
+
+    interface AnimationListener {
+        fun onAnimationEnd()
+    }
+
 
     constructor(context: Context) : super(context)
 
@@ -165,6 +177,8 @@ class SVGLoader : View, LoaderContract {
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
 
+        if (SVGLoaderState.StateEnd == state) return
+
         val timeDiff = (System.currentTimeMillis() - animStartTime).toFloat()
 
         for (i in shapeDataArray.indices) {
@@ -213,6 +227,7 @@ class SVGLoader : View, LoaderContract {
 
             if (timeDiff > timePerShape + fillTime) {
                 listener?.onAnimationEnd()
+                state = SVGLoaderState.StateEnd
                 return
             }
 
@@ -227,14 +242,14 @@ class SVGLoader : View, LoaderContract {
         return Math.max(min, Math.min(max, v))
     }
 
-    fun rebuildShapeData() {
+    private fun rebuildShapeData() {
 
-        val X = mWidth / viewportWidth
-        val Y = mHeight / viewportHeight
+        val sx = mWidth / viewportWidth
+        val sy = mHeight / viewportHeight
 
         val scaleMatrix = Matrix()
-        val outerRect = RectF(X, X, Y, Y)
-        scaleMatrix.setScale(X, Y, outerRect.centerX(), outerRect.centerY())
+        val outerRect = RectF(sx, sx, sy, sy)
+        scaleMatrix.setScale(sx, sy, outerRect.centerX(), outerRect.centerY())
 
         shapeDataArray = arrayOfNulls(shapesStringArray.size)
         for (i in shapesStringArray.indices) {
@@ -294,17 +309,4 @@ class SVGLoader : View, LoaderContract {
         }
 
     }
-
-    private enum class SVGLoaderState {
-        StateLoading, StateFill
-    }
-
-    private var state: SVGLoaderState = SVGLoaderState.StateLoading
-
-    var listener: SVGLoader.AnimationListener? = null
-
-    interface AnimationListener {
-        fun onAnimationEnd()
-    }
-
 }

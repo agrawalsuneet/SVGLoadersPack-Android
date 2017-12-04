@@ -25,11 +25,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        container = findViewById(R.id.container)
-        //addSVGViewProgrammatically()
-
         playPauseBtn = findViewById(R.id.playpauseBtn)
         nextSVGBtn = findViewById(R.id.nextSvgBtn)
+
+        container = findViewById(R.id.container)
+        //addSVGViewProgrammatically()
 
         playPauseBtn.setOnClickListener {
             if (svgView.isAnimRunning()) {
@@ -43,6 +43,8 @@ class MainActivity : AppCompatActivity() {
                 nextSVGBtn.isEnabled = false
             }
         }
+
+        //return
 
         svgView = findViewById(R.id.svg_loader)
         svgView.listener = (object : SVGLoader.AnimationListener {
@@ -65,7 +67,7 @@ class MainActivity : AppCompatActivity() {
                     svgView.fillColorsArray = resources.getIntArray(R.array.twitter_logo_colors)
                     svgView.validateTraceColors()
                     svgView.setViewportSize(2000.0f, 1625.36f)
-                    currentLogoPos = 2
+                    currentLogoPos = 3
                 }
 
                 2 -> {
