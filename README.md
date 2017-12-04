@@ -76,6 +76,9 @@ The important thing here to take care is the viewport width and height that you 
         })
 
         svgView.startAnimation()
+        
+        //to stop loading call endAnimation()
+        svgView.endAnimation()
 ```
 ##### Through Code
 * Kotlin
@@ -103,6 +106,9 @@ The important thing here to take care is the viewport width and height that you 
         })
         container.addView(svgView)
         svgView.startAnimation()
+        
+        //to stop loading call endAnimation()
+        svgView.endAnimation()
 ```
 
 * Java
@@ -129,6 +135,9 @@ The important thing here to take care is the viewport width and height that you 
         
         container.addView(svgLoader);
         svgLoader.startAnimation();
+        
+        //to stop loading call endAnimation()
+        svgView.endAnimation();
 ```
 
 Please take a 2 mins survey to make this library better [here](https://goo.gl/forms/xCPtiy3WdCOPlTUU2).
