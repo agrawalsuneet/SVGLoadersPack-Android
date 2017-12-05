@@ -5,7 +5,9 @@
 
 
 ### SVGLoader
+![svgloader](https://user-images.githubusercontent.com/12999622/33598792-e812a7ae-d99b-11e7-847e-53515c590d2f.gif)
 
+please check a better quality demo [here](https://www.youtube.com/watch?v=o-sFpilC0HA)
 
 Other loaders: [LinearDotsLoader](https://github.com/agrawalsuneet/DotsLoader), [CircularDotsLoader](https://github.com/agrawalsuneet/DotsLoader), [LazyLoader](https://github.com/agrawalsuneet/DotsLoader), [TashieLoader](https://github.com/agrawalsuneet/DotsLoader), [FourFoldLoader](https://github.com/agrawalsuneet/FourFoldLoader), [ZipZapLoader](https://github.com/agrawalsuneet/FourFoldLoader), [ClockLoader](https://github.com/agrawalsuneet/LoadersPack), [RippleLoader](https://github.com/agrawalsuneet/LoadersPack)
 
