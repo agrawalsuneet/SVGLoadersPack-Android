@@ -60,3 +60,12 @@ google-services.json
 freeline.py
 freeline/
 freeline_project_description.json
+
+# OS-specific files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db

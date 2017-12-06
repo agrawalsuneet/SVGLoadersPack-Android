@@ -1,35 +1,44 @@
 package com.agrawalsuneet.svgloaders
 
 import android.os.Bundle
-import android.support.constraint.ConstraintLayout
 import android.support.v7.app.AppCompatActivity
 import android.view.ViewGroup
 import android.view.animation.DecelerateInterpolator
-import android.view.animation.LinearInterpolator
 import android.widget.Button
+import android.widget.LinearLayout
 import android.widget.Toast
+import com.agrawalsuneet.svgloaderspack.loaders.EcgPulseLoader
 import com.agrawalsuneet.svgloaderspack.loaders.SVGLoader
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var container: ConstraintLayout
+    lateinit var container: LinearLayout
 
     lateinit var svgView: SVGLoader
 
     lateinit var playPauseBtn: Button
     lateinit var nextSVGBtn: Button
 
+    lateinit var pulseLoader: EcgPulseLoader
+
     var currentLogoPos = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
-        playPauseBtn = findViewById(R.id.playpauseBtn)
-        nextSVGBtn = findViewById(R.id.nextSvgBtn)
+        setContentView(R.layout.activity_main2)
 
         container = findViewById(R.id.container)
+
         //addSVGViewProgrammatically()
+        //handleSVGLoader()
+
+        pulseLoader = findViewById(R.id.pulse_loader)
+        pulseLoader.startAnimation()
+    }
+
+    private fun handleSVGLoader() {
+        playPauseBtn = findViewById(R.id.playpauseBtn)
+        nextSVGBtn = findViewById(R.id.nextSvgBtn)
 
         playPauseBtn.setOnClickListener {
             if (svgView.isAnimRunning()) {
