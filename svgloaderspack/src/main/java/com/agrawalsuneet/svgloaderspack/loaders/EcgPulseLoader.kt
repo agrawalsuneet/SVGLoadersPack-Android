@@ -31,8 +31,8 @@ class EcgPulseLoader : View, LoaderContract {
 
     private lateinit var shapeData: ShapeData
 
-    private val viewportWidth: Float = 5208f
-    private val viewportHeight: Float = 5208f
+    private val viewportWidth: Float = 400f
+    private val viewportHeight: Float = 76.33f
 
     var timePerPulse: Int = 2000
 
@@ -168,7 +168,7 @@ class EcgPulseLoader : View, LoaderContract {
             }
         }
         shapeData.paint = Paint()
-        shapeData.paint.style = Paint.Style.STROKE
+        shapeData.paint.style = Paint.Style.FILL
         shapeData.paint.isAntiAlias = true
         shapeData.paint.color = Color.WHITE
         shapeData.paint.strokeWidth = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 1f, resources.displayMetrics)
